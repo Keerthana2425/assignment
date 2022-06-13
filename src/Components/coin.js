@@ -5,7 +5,7 @@ class Coin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coins: [{ Cname: "Not Found", rate: udata.data.amount }],
+      coins: [{ Cname: "Coin Base", rate: udata.data.amount }],
     };
     this.Higher = this.Higher.bind(this);
     this.lower = this.lower.bind(this);
@@ -42,7 +42,7 @@ class Coin extends Component {
         let rate = data.data.bpi.USD.rate;
         let price1 = parseFloat(rate.replace(/\,/g, "")).toFixed(2);
         this.setState({
-          coins: [...this.state.coins, { Cname: "Not Found", rate: price1 }],
+          coins: [...this.state.coins, { Cname: "Coin Desk", rate: price1 }],
         });
       })
       .catch((err) => console.log(err));
@@ -52,12 +52,13 @@ class Coin extends Component {
         let desiredCoin = data.data.data.filter((c) => c.id === "usd-coin");
         let price2 = parseFloat(desiredCoin[0].supply).toFixed(2);
         this.setState({
-          coins: [...this.state.coins, { Cname: "Not found", rate: price2 }],
+          coins: [...this.state.coins, { Cname: "Coin Cap", rate: price2 }],
         });
         console.log(this.state.coins);
       })
       .catch((err) => console.log(err));
   }
+
   render() {
     return (
       <div>
