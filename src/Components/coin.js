@@ -64,7 +64,7 @@ class Coin extends Component {
       <div>
         {this.state.coins.length > 0 ? (
           <div>
-            <div>helloo</div>
+            <h4>Coin Data</h4>
             <ul>
               {this.state.coins.map((c, i) => {
                 <li key={i}>
@@ -72,8 +72,44 @@ class Coin extends Component {
                 </li>;
               })}
             </ul>
-            <button onClick={this.Higher}>High</button>
-            <button onClick={this.lower}>Low</button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                marginTop: "10%",
+                marginLeft: "20%",
+                marginRight: "20%",
+              }}
+            >
+              <button
+                onClick={this.Higher}
+                style={{
+                  color: "white",
+                  backgroundColor: "blueviolet",
+                  height: "5vh",
+                  width: "90px",
+                  border: "none",
+                  borderRadius: "19px",
+                  fontSize: "1.1rem",
+                }}
+              >
+                High
+              </button>
+              <button
+                onClick={this.lower}
+                style={{
+                  color: "white",
+                  backgroundColor: "blueviolet",
+                  height: "5vh",
+                  width: "90px",
+                  border: "none",
+                  borderRadius: "19px",
+                  fontSize: "1.1rem",
+                }}
+              >
+                Low
+              </button>
+            </div>
           </div>
         ) : (
           <div>data not found</div>
