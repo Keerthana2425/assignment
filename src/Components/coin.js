@@ -10,7 +10,6 @@ class Coin extends Component {
     this.Higher = this.Higher.bind(this);
     this.lower = this.lower.bind(this);
   }
-
   Higher() {
     this.state.coins.sort((a, b) => {
       if (parseFloat(a.rate) > parseFloat(b.rate)) {
@@ -36,9 +35,11 @@ class Coin extends Component {
   }
 
   async componentDidMount() {
+    console.log("component did mount");
     await axios
       .get("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((data) => {
+        console.log(data);
         let rate = data.data.bpi.USD.rate;
         let price1 = parseFloat(rate.replace(/\,/g, "")).toFixed(2);
         this.setState({
@@ -59,61 +60,61 @@ class Coin extends Component {
       .catch((err) => console.log(err));
   }
 
+  componentDidUpdate() {
+    console.log("component did update");
+  }
+
   render() {
     return (
       <div>
-        {this.state.coins.length > 0 ? (
-          <div>
-            <h4>Coin Data</h4>
-            <ul>
-              {this.state.coins.map((c, i) => {
-                <li key={i}>
-                  company name: {c.Cname} - Rate-{c.rate}USD
-                </li>;
-              })}
-            </ul>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                marginTop: "10%",
-                marginLeft: "20%",
-                marginRight: "20%",
-              }}
-            >
-              <button
-                onClick={this.Higher}
-                style={{
-                  color: "white",
-                  backgroundColor: "blueviolet",
-                  height: "5vh",
-                  width: "90px",
-                  border: "none",
-                  borderRadius: "19px",
-                  fontSize: "1.1rem",
-                }}
-              >
-                High
-              </button>
-              <button
-                onClick={this.lower}
-                style={{
-                  color: "white",
-                  backgroundColor: "blueviolet",
-                  height: "5vh",
-                  width: "90px",
-                  border: "none",
-                  borderRadius: "19px",
-                  fontSize: "1.1rem",
-                }}
-              >
-                Low
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div>data not found</div>
-        )}
+        <h4>Coin Data</h4>
+        <ul>
+          {this.state.coins.map((c, i) => {
+            return (
+              <li key={i}>
+                company name: {c.Cname} - Rate-{c.rate}USD
+              </li>
+            );
+          })}
+        </ul>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            marginTop: "10%",
+            marginLeft: "20%",
+            marginRight: "20%",
+          }}
+        >
+          <button
+            onClick={this.Higher}
+            style={{
+              color: "white",
+              backgroundColor: "blueviolet",
+              height: "5vh",
+              width: "90px",
+              border: "none",
+              borderRadius: "19px",
+              fontSize: "1.1rem",
+            }}
+          >
+            High
+          </button>
+          <button
+            onClick={this.lower}
+            style={{
+              color: "white",
+              backgroundColor: "blueviolet",
+              height: "5vh",
+              width: "90px",
+              border: "none",
+              borderRadius: "19px",
+              fontSize: "1.1rem",
+            }}
+          >
+            Low
+          </button>
+        </div>
       </div>
     );
   }
