@@ -9,8 +9,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Coin />
-        {/* <FunctionalCoin /> */}
+        {/* <Coin /> */}
+        <FunctionalCoin />
         {/* <Fun />
         <CoinData /> */}
       </div>

@@ -11,7 +11,7 @@ class Coin extends Component {
     this.lower = this.lower.bind(this);
   }
   Higher() {
-    let high = this.state.coins.sort((a, b) => {
+    this.state.coins.sort((a, b) => {
       if (parseFloat(a.rate) > parseFloat(b.rate)) {
         return -1;
       }
@@ -20,11 +20,10 @@ class Coin extends Component {
       }
     });
     console.log(this.state.coins);
-    this.setState({ coins: high });
   }
 
   lower() {
-    let low = this.state.coins.sort((a, b) => {
+    this.state.coins.sort((a, b) => {
       if (parseFloat(a.rate) < parseFloat(b.rate)) {
         return -1;
       }
@@ -32,13 +31,12 @@ class Coin extends Component {
         return 1;
       }
     });
-    this.setState({ coins: low });
     console.log(this.state.coins);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log("component did mount");
-    axios
+    await axios
       .get("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((data) => {
         console.log(data);
@@ -49,7 +47,7 @@ class Coin extends Component {
         });
       })
       .catch((err) => console.log(err));
-    axios
+    await axios
       .get("https://api.coincap.io/v2/assets")
       .then((data) => {
         let desiredCoin = data.data.data.filter((c) => c.id === "usd-coin");
@@ -62,9 +60,9 @@ class Coin extends Component {
       .catch((err) => console.log(err));
   }
 
-  // componentDidUpdate() {
-  //   console.log("component did update");
-  // }
+  componentDidUpdate() {
+    console.log("component did update");
+  }
 
   render() {
     return (
